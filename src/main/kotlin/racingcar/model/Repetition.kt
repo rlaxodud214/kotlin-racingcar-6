@@ -3,21 +3,18 @@ package racingcar.model
 data class Repetition(
     private val inputRepetition: String,
 ) {
-    private var _count: Int
-    internal val count: Int get() = _count
+    internal val count: Int get() = inputRepetition.toInt()
 
     init {
-        checkDigitRange()
-        _count = inputRepetition.toInt()
+        checkDigitRange(inputRepetition)
     }
 
-    private fun checkDigitRange() {
-        val inputRepetitionInt = inputRepetition.toIntOrNull()
-            ?: throw IllegalArgumentException(ONLY_DIGIT)
+    private fun checkDigitRange(inputRepetition: String) {
+        val inputRepetitionInt = requireNotNull(inputRepetition.toIntOrNull()) {
+            ONLY_DIGIT
+        }
 
         require(inputRepetitionInt >= MIN_REPETITION_COUNT) { DIGIT_THAN_ONE }
-
-        _count = inputRepetitionInt
     }
 
     companion object {

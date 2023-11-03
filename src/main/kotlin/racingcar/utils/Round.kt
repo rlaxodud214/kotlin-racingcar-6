@@ -11,7 +11,5 @@ object Round {
     internal fun generateRandomNumber() =
         Randoms.pickNumberInRange(RANDOM_RANGE_START, RANDOM_RANGE_END)
 
-    internal fun isForward(randomNumber: Int): Boolean =
-        true.takeIf { randomNumber >= FORWARD_THRESHOLD } ?: false
-
+    internal fun isForward(randomNumber: Int) = randomNumber >= FORWARD_THRESHOLD
 }

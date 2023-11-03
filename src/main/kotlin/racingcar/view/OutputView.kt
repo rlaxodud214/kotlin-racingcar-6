@@ -6,15 +6,15 @@ import racingcar.view.Constants.COMMA_DELIMITERS
 class OutputView {
     internal fun printResultInfo() = println("\n$EXECUTION_RESULT_TEXT")
 
-    internal fun printRoundResult(carList: List<Car>) {
-        for (currentCar in carList) {
-            println("${currentCar.name} : ${DASH.repeat(currentCar.score)}")
+    internal fun printRoundResult(cars: List<Car>) {
+        for (car in cars) {
+            println("${car.name} : ${DASH.repeat(car.score)}")
         }
         println()
     }
 
-    internal fun printWinner(winnerList: List<String>) =
-        print("$FINAL_WINNER ${winnerList.joinToString("${COMMA_DELIMITERS} ")}")
+    internal fun printWinner(winnerNames: List<String>) =
+        print("$FINAL_WINNER ${winnerNames.joinToString("${COMMA_DELIMITERS} ")}")
 
 
     companion object {

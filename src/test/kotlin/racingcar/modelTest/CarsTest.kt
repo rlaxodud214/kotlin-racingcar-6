@@ -72,7 +72,7 @@ class CarsTest {
     }
 
     @ParameterizedTest
-    @MethodSource("duplicationTestdataGenerate")
+    @MethodSource("generateDuplicationTestdata")
     @DisplayName("Cars(init): fromNames() / Fail Case")
     fun `Cars 객체 생성, 차 이름이 중복되지 않았는지 검증`(inputName: List<String>) {
         // when (JUnit5)
@@ -90,18 +90,18 @@ class CarsTest {
 
 
     @ParameterizedTest
-    @MethodSource("CarsInstanceGenerateData")
+    @MethodSource("generateCarNameData")
     @DisplayName("Cars(init): fromNames() size Valid / Success Case")
     fun `Cars 객체 생성, size 검증`(inputName: List<String>) {
         val cars = assertDoesNotThrow {
             Cars.fromNames(inputName)
         }
 
-        assertThat(cars.carList.size).isEqualTo(inputName.size) // 사이즈 검증
+        assertThat(cars.carObjects.size).isEqualTo(inputName.size) // 사이즈 검증
     }
 
     @ParameterizedTest
-    @MethodSource("CarsInstanceGenerateData")
+    @MethodSource("generateCarNameData")
     @DisplayName("Cars(init): fromNames() carName Valid / Success Case")
     fun `Cars 객체 생성, carName 검증`(inputName: List<String>) {
         val cars = assertDoesNotThrow {
@@ -109,21 +109,21 @@ class CarsTest {
         }
 
         for ((index, carName) in inputName.withIndex()) {
-            val carsInstanceCarName = cars.carList[index].name
+            val carsInstanceCarName = cars.carObjects[index].name
             assertThat(carsInstanceCarName).isEqualTo(carName) // carName 검증
         }
     }
 
     companion object {
         @JvmStatic
-        private fun duplicationTestdataGenerate() = listOf(
+        private fun generateDuplicationTestdata() = listOf(
             listOf("1", "01", "1", "2"),
             listOf("010", "020", "010"),
             listOf("101", "102", "101"),
         )
 
         @JvmStatic
-        private fun CarsInstanceGenerateData() = listOf(
+        private fun generateCarNameData() = listOf(
             listOf("1", "2", "1232", "2123"),
             listOf("asd", "125s", "sd21"),
         )

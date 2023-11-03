@@ -12,37 +12,37 @@ import racingcar.model.Winner
 class WinnerTest {
 
     @ParameterizedTest
-    @MethodSource("carListForZeroScore")
+    @MethodSource("carsForZeroScore")
     @DisplayName("Winner(init): Zero Score Winner Case")
-    fun `Winner 객체 생성, bestScore 오류 발생 검증 (bestScore가 0일 때)`(carList: List<Car>) {
+    fun `Winner 객체 생성, bestScore 오류 발생 검증 (bestScore가 0일 때)`(cars: List<Car>) {
         val exception = assertThrows<IllegalArgumentException> {
-            Winner(carList)
+            Winner(cars).getWinners()
         }
 
         assertEquals(Winner.ZERO_SCORE_IS_NOT_WINNER, exception.message)
     }
 
     @ParameterizedTest
-    @MethodSource("carListForSingleWinner")
+    @MethodSource("carsForSingleWinner")
     @DisplayName("Winner(init): Single Winner Case")
-    fun `Winner 객체 생성, 우승자 Name List 검증 (우승자가 한 명인 경우)`(carList: List<Car>) {
-        val winner = Winner(carList)
+    fun `Winner 객체 생성, 우승자 Name List 검증 (우승자가 한 명인 경우)`(cars: List<Car>) {
+        val winnerNames = Winner(cars).getWinners()
 
-        assertThat(winner.winnerList).isEqualTo(listOf("ToBBi"))
+        assertThat(winnerNames).isEqualTo(listOf("ToBBi"))
     }
 
     @ParameterizedTest
-    @MethodSource("carListForMultiWinner")
+    @MethodSource("carsForMultiWinner")
     @DisplayName("Winner(init): Multi Winner Case")
-    fun `Winner 객체 생성, 우승자 Name List 검증 (우승자가 여러 명인 경우)`(carList: List<Car>) {
-        val winners = Winner(carList)
+    fun `Winner 객체 생성, 우승자 Name List 검증 (우승자가 여러 명인 경우)`(cars: List<Car>) {
+        val winnerNames = Winner(cars).getWinners()
 
-        assertThat(winners.winnerList).isEqualTo(listOf("Pobi", "JS", "Per"))
+        assertThat(winnerNames).isEqualTo(listOf("Pobi", "JS", "Per"))
     }
 
     companion object {
         @JvmStatic
-        private fun carListForZeroScore(): List<List<Car>> {
+        private fun carsForZeroScore(): List<List<Car>> {
             return listOf(
                 listOf(
                     Car("Pobi", 0),
@@ -53,7 +53,7 @@ class WinnerTest {
         }
 
         @JvmStatic
-        private fun carListForSingleWinner(): List<List<Car>> {
+        private fun carsForSingleWinner(): List<List<Car>> {
             return listOf(
                 listOf(
                     Car("Pobi", 5),
@@ -64,7 +64,7 @@ class WinnerTest {
         }
 
         @JvmStatic
-        private fun carListForMultiWinner(): List<List<Car>> {
+        private fun carsForMultiWinner(): List<List<Car>> {
             return listOf(
                 listOf(
                     Car("Pobi", 8),

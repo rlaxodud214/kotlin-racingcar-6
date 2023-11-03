@@ -1,6 +1,8 @@
 package racingcar
 
 import racingcar.controller.GameController
+import racingcar.view.InputView
+import racingcar.view.OutputView
 
 /*  명령어 학습(C : Ctrl, A: Alt, S:Shift)
     1. CA + l : 자동 정렬
@@ -15,6 +17,6 @@ import racingcar.controller.GameController
 */
 
 fun main() {
-    val gameController = GameController()
+    val gameController = GameController(InputView(), OutputView())
     gameController.start()
 }
